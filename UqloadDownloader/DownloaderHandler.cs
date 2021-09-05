@@ -11,7 +11,7 @@ using System.ComponentModel;
 
 namespace UqloadDownloader
 {
-    class DownloadHandler
+    class DownloadHandler // This class is used to manage and handle download
     {
         Panel Handle_Panel = null;
 
