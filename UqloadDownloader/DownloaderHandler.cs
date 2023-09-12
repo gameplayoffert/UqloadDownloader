@@ -35,7 +35,7 @@ namespace UqloadDownloader
             return result;
         }
 
-        public DownloadHandler(string DownloadURL, Panel PanelToHandle, int push_val, string file_title = "")
+        public DownloadHandler(string DownloadURL, Panel PanelToHandle, int push_val, string file_title = null)
         {
             bool can_download = false;
             int download_type = 1;
@@ -46,13 +46,22 @@ namespace UqloadDownloader
 
             try
             {
-                if (DownloadURL != "") {
-                    if (DownloadURL.Contains("https://uqload.com/embed-"))
+                if (DownloadURL != "")
+                {
+                    if (Regex.IsMatch(DownloadURL, @"^https?://uqload\.(com|io)/embed\-"))
                     {
                         string page_str = new_client.DownloadString(DownloadURL);
                         TextBox local_tb = new TextBox();
 
                         local_tb.Text = page_str;
+
+                        if(string.IsNullOrEmpty(file_title))
+                        {
+                            var rmatch = Regex.Match(page_str, "chromecast: { media: {title: \"([^\"]*)\"}", RegexOptions.IgnoreCase);
+
+                            if(rmatch.Success)
+                            file_title = rmatch.Groups[1].Value;
+                        }
 
                         foreach (string tb_line in local_tb.Lines)
                         {
