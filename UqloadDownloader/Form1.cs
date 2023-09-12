@@ -46,14 +46,7 @@ namespace UqloadDownloader
             //client1.Headers.Add("Referer", "https://uqload.com/embed-9f6ysykvhnmt.html");
             //client1.DownloadFileAsync(new Uri("https://m40.uqload.org/3rfkmzf4djw2q4drdkl7d7vglvngp2nyxrpni6554omg42jolwkizyrowz5a/v.mp4"), "G:\\Merde.mp4");
 
-            if (textBox2.Text != "") {
-                DownloadHandler new_download = new DownloadHandler(textBox1.Text, panel1, global_push, textBox2.Text);
-            }
-            else
-            {
-                string rand_name = GetRandomName(32);
-                DownloadHandler new_download = new DownloadHandler(textBox1.Text, panel1, global_push, rand_name);
-            }
+            DownloadHandler new_download = new DownloadHandler(textBox1.Text, panel1, global_push, textBox2.Text);
         }
     }
 }
